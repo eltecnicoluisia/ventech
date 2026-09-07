@@ -76,7 +76,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => {
     setUser(null);
     sessionStorage.removeItem('ventech_user');
-    window.location.href = '/login';
+    
+    // Auto-detect gh-pages basePath
+    if (typeof window !== 'undefined' && window.location.pathname.startsWith('/ventech')) {
+      window.location.href = '/ventech/login';
+    } else {
+      window.location.href = '/login';
+    }
   };
 
   const updateSettings = (newSettings: TenantSettings) => {

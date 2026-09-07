@@ -1,0 +1,36 @@
+{
+  "name": "VENTECH ERP",
+  "short_name": "VENTECH",
+  "description": "Sistema ERP/POS para PyMEs - Multi-tenant, Multimoneda, Offline-First",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/pos.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Punto de Venta"
+    }
+  ],
+  "categories": ["business", "finance"],
+  "lang": "es",
+  "dir": "ltr"
+}

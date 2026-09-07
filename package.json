@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "consulta-dolar-venezuela": "^1.1.2",
+    "ssh2": "^1.17.0"
+  }
+}

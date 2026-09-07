@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VENTECH ERP</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      display: flex; align-items: center; justify-content: center;
+      height: 100vh; overflow: hidden;
+      font-family: -apple-system, 'Segoe UI', sans-serif;
+      -webkit-app-region: drag;
+    }
+    .card {
+      background: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 24px;
+      width: 440px;
+      padding: 48px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    }
+    .logo {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .logo-icon {
+      width: 52px; height: 52px;
+      background: #2563eb;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 30px rgba(37,99,235,0.5);
+    }
+    .logo-icon svg { width: 28px; height: 28px; color: white; }
+    .logo-text { color: white; font-size: 26px; font-weight: 900; letter-spacing: 3px; }
+    .subtitle { color: #71717a; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; margin-top: -16px; }
+    .spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #27272a;
+      border-top-color: #3b82f6;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .status { color: #52525b; font-size: 13px; }
+    .bar-bg {
+      width: 240px; height: 3px;
+      background: #27272a; border-radius: 2px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      border-radius: 2px;
+      animation: load 1.8s ease-in-out infinite;
+    }
+    @keyframes load {
+      0% { width: 0%; margin-left: 0%; }
+      50% { width: 70%; margin-left: 15%; }
+      100% { width: 0%; margin-left: 100%; }
+    }
+    .version { color: #3f3f46; font-size: 11px; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </svg>
+      </div>
+      <span class="logo-text">VENTECH</span>
+    </div>
+    <p class="subtitle">Sistema ERP / POS</p>
+    <div class="spinner"></div>
+    <div class="bar-bg"><div class="bar-fill"></div></div>
+    <p class="status">Iniciando sistema...</p>
+    <p class="version">v1.0.0</p>
+  </div>
+  <script>
+    function setStatus(msg) {
+      const el = document.querySelector('.status');
+      if (el) el.innerText = msg;
+    }
+  </script>
+</body>
+</html>

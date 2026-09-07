@@ -1,0 +1,1 @@
+docker compose -f ~/erp-platform/docker-compose.yml exec -T postgres psql -U erp_user -d erp_db -c "INSERT INTO \"Tenant\" (id, name, \"baseCurrency\", \"localCurrency\", \"createdAt\", \"updatedAt\") VALUES ('default-tenant', 'Ventech Default', 'USD', 'VES', NOW(), NOW()) ON CONFLICT (id) DO NOTHING;"

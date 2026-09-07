@@ -1,0 +1,12 @@
+{
+  "code": "",
+  "name": "Corneta",
+  "category": "Audio",
+  "type": "Hardware",
+  "unit": "Unidad",
+  "stock": 5,
+  "minStock": 1,
+  "costUSD": 10,
+  "priceUSD": 20,
+  "status": "ACTIVO"
+}

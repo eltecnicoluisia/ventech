@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>VENTECH ERP — Configuración</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #18181b;
+      font-family: -apple-system, 'Segoe UI', sans-serif;
+      color: #e4e4e7;
+      height: 100vh;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      -webkit-app-region: drag;
+    }
+
+    /* Custom title bar */
+    .titlebar {
+      height: 36px;
+      background: #09090b;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px;
+      border-bottom: 1px solid #27272a;
+      flex-shrink: 0;
+    }
+    .titlebar-title {
+      font-size: 12px; color: #71717a; letter-spacing: 1px;
+    }
+
+    /* Main content */
+    .content {
+      flex: 1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 32px;
+      gap: 32px;
+      -webkit-app-region: no-drag;
+    }
+
+    .logo {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .logo-row {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .logo-icon {
+      width: 44px; height: 44px; background: #2563eb;
+      border-radius: 14px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 20px rgba(37,99,235,0.4);
+    }
+    .logo-icon svg { width: 22px; height: 22px; }
+    .logo-name { font-size: 22px; font-weight: 900; letter-spacing: 3px; color: white; }
+    .logo-sub { font-size: 11px; color: #71717a; letter-spacing: 2px; text-transform: uppercase; }
+
+    .form-box {
+      width: 100%; max-width: 400px;
+      background: #1c1c1f;
+      border: 1px solid #27272a;
+      border-radius: 20px;
+      padding: 28px;
+      display: flex; flex-direction: column; gap: 20px;
+    }
+
+    .form-title { font-size: 15px; font-weight: 700; color: white; }
+    .form-desc { font-size: 12px; color: #71717a; line-height: 1.6; margin-top: -12px; }
+
+    label { font-size: 12px; font-weight: 600; color: #a1a1aa; display: block; margin-bottom: 6px; }
+
+    input[type="text"] {
+      width: 100%; padding: 12px 16px;
+      background: #09090b; border: 1px solid #27272a;
+      border-radius: 12px; color: #e4e4e7;
+      font-size: 14px; font-family: monospace;
+      outline: none; transition: border-color 0.2s;
+    }
+    input[type="text"]:focus { border-color: #3b82f6; }
+
+    .status-row {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 12px; min-height: 20px;
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #3f3f46; flex-shrink: 0; }
+    .dot.ok { background: #22c55e; box-shadow: 0 0 6px #22c55e; }
+    .dot.err { background: #ef4444; box-shadow: 0 0 6px #ef4444; }
+    .dot.testing { background: #3b82f6; animation: pulse 1s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+    .btn-connect {
+      width: 100%; padding: 13px;
+      background: #2563eb; border: none; border-radius: 12px;
+      color: white; font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s;
+      letter-spacing: 0.5px;
+    }
+    .btn-connect:hover { background: #1d4ed8; }
+    .btn-connect:disabled { background: #1e1e22; color: #52525b; cursor: not-allowed; }
+
+    .hint { font-size: 11px; color: #52525b; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="titlebar">
+    <span class="titlebar-title">⚡ VENTECH ERP — Configuración del servidor</span>
+  </div>
+
+  <div class="content">
+    <div class="logo">
+      <div class="logo-row">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <span class="logo-name">VENTECH</span>
+      </div>
+      <span class="logo-sub">Primera configuración</span>
+    </div>
+
+    <div class="form-box">
+      <p class="form-title">Conectar al servidor VENTECH</p>
+      <p class="form-desc">Ingresa la dirección IP de tu servidor. Normalmente es la IP de la computadora o dispositivo donde instalaste el sistema.</p>
+
+      <div>
+        <label>URL del servidor</label>
+        <input
+          type="text"
+          id="urlInput"
+          placeholder="http://192.168.100.2"
+          value="http://192.168.100.2"
+        />
+      </div>
+
+      <div class="status-row">
+        <div class="dot" id="dot"></div>
+        <span id="statusText" style="color: #71717a;">Listo para conectar</span>
+      </div>
+
+      <button class="btn-connect" id="btnConnect" onclick="connect()">
+        Conectar y guardar
+      </button>
+
+      <p class="hint">Asegúrate de estar conectado a la misma red que el servidor</p>
+    </div>
+  </div>
+
+  <script>
+    async function connect() {
+      const url = document.getElementById('urlInput').value.trim().replace(/\/$/, '');
+      if (!url) return;
+
+      const dot = document.getElementById('dot');
+      const status = document.getElementById('statusText');
+      const btn = document.getElementById('btnConnect');
+
+      btn.disabled = true;
+      btn.textContent = 'Probando conexión...';
+      dot.className = 'dot testing';
+      status.style.color = '#3b82f6';
+      status.textContent = 'Verificando servidor...';
+
+      try {
+        const ok = await window.ventechDesktop.testConnection(url);
+        if (ok) {
+          dot.className = 'dot ok';
+          status.style.color = '#22c55e';
+          status.textContent = '¡Servidor encontrado! Conectando...';
+          btn.textContent = '✓ Conectado';
+          await new Promise(r => setTimeout(r, 800));
+          await window.ventechDesktop.saveServer(url);
+        } else {
+          throw new Error('No se pudo conectar');
+        }
+      } catch {
+        dot.className = 'dot err';
+        status.style.color = '#ef4444';
+        status.textContent = 'No se pudo conectar. Verifica la IP y red.';
+        btn.disabled = false;
+        btn.textContent = 'Intentar nuevamente';
+      }
+    }
+
+    document.getElementById('urlInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') connect();
+    });
+
+    // Auto-fill from config if exists
+    window.addEventListener('load', async () => {
+      const config = await window.ventechDesktop.getConfig();
+      if (config?.serverUrl) {
+        document.getElementById('urlInput').value = config.serverUrl;
+      }
+    });
+  </script>
+</body>
+</html>

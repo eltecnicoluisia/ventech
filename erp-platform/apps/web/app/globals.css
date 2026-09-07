@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #18181b; /* zinc-900 */
+  --foreground: #e4e4e7; /* zinc-200 */
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: radial-gradient(circle at center, #3f3f46 0%, #18181b 100%);
+  color: var(--foreground);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+}
+
+/* Efecto de letras grabadas (fresadora) */
+.text-engraved {
+  color: #93c5fd; /* blue-300 para dar mejor contraste */
+  text-shadow: 
+    -1px -1px 2px rgba(0, 0, 0, 0.9),
+    1px 1px 2px rgba(255, 255, 255, 0.15);
+}
+
+.text-engraved-light {
+  color: #e4e4e7; /* zinc-200 */
+  text-shadow: 
+    -1px -1px 1px rgba(0, 0, 0, 0.8),
+    1px 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+.text-engraved-blue {
+  color: #3b82f6; /* blue-500 oscurecido */
+  text-shadow: 
+    -1px -1px 1px rgba(0, 0, 0, 0.8),
+    1px 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Vidrio grueso con biselado (Thick Beveled Glass) */
+.glass-bevel {
+  background: rgba(63, 63, 70, 0.25); /* zinc-700 con transparencia */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    6px 6px 12px rgba(0,0,0,0.6), /* sombra exterior pesada */
+    -2px -2px 8px rgba(255,255,255,0.03), /* luz exterior suave */
+    inset 2px 2px 3px rgba(255,255,255,0.15), /* bisel interno luz (fresado) */
+    inset -2px -2px 4px rgba(0,0,0,0.6); /* bisel interno sombra */
+  border-radius: 1.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.glass-bevel:hover {
+  background: rgba(82, 82, 91, 0.35);
+  box-shadow: 
+    8px 8px 16px rgba(0,0,0,0.7), 
+    -2px -2px 8px rgba(255,255,255,0.05), 
+    inset 2px 2px 4px rgba(255,255,255,0.2), 
+    inset -2px -2px 5px rgba(0,0,0,0.7);
+  transform: translateY(-2px);
+}
+
+.glass-bevel:active {
+  transform: translateY(1px);
+  box-shadow: 
+    2px 2px 8px rgba(0,0,0,0.8), 
+    inset 3px 3px 6px rgba(0,0,0,0.7), 
+    inset -2px -2px 3px rgba(255,255,255,0.05);
+}
+
+/* Iconos integrados en el vidrio */
+.glass-icon {
+  background: rgba(39, 39, 42, 0.5); /* zinc-800 */
+  box-shadow: 
+    inset 2px 2px 4px rgba(0,0,0,0.6),
+    inset -1px -1px 2px rgba(255,255,255,0.1),
+    1px 1px 2px rgba(255,255,255,0.1);
+  border-radius: 0.75rem;
+}
+
+/* Scrollbars personalizados */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0,0,0,0.2);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.2);
+}

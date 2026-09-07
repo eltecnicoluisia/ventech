@@ -1,0 +1,12 @@
+﻿const fs = require("fs");
+const path = require("path");
+
+// SVG del icono VENTECH
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <rect width="256" height="256" rx="48" fill="#2563eb"/>
+  <polygon points="138,32 58,148 128,148 118,224 198,108 128,108 138,32" fill="white"/>
+</svg>`;
+
+fs.mkdirSync(path.join(__dirname, "assets"), { recursive: true });
+fs.writeFileSync(path.join(__dirname, "assets", "icon.svg"), svg);
+console.log("SVG icon created");
